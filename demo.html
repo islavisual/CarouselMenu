@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<meta name="description" content="jQuery CarouselMenu 1.0. Plugin to create navigation menus with carousel effect." />
+		<meta name="author" content="Pablo E. Fernández (islavisual@gmail.com)" />	
+		<meta name="keywords" content="Carousel menu, bootstrap, jquery, jquery carousel menu, bootstrap carousel menu" />
+		<meta http-equiv="Pragma" content="no-cache" />	
+		<title>jQuery CarouselMenu 1.0</title>
+		<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen,print" />
+		<style>
+			.navbar-toggle 						{ background-color: rgba(0, 0, 0, 0.2); }
+			.navbar-toggle .icon-bar			{ background-color: #ffffff; }
+			.items div 							{ float:left; width:680px;}
+			.items ul 							{ list-style-type: none; border-left: 1px solid #006699; border-right: 1px solid #006699; padding: 0; position: absolute; width: 100%; margin: 0 50px;  }
+			a.left 								{ background-color: #006699; left: 0; margin-left: 0; position: relative; width: 50px; height: 50px; display: block; cursor: pointer; border-right: 1px solid #00437D; float: left; }
+			a.right 							{ background-color: #006699; left: 0; clear: right; float: right; margin-right: 0; position: relative; width: 50px; height: 50px; display: block; cursor: pointer; border-left: 1px solid #00437D; float:right; }
+			a.left .icon 						{ border-bottom: 12px solid transparent; border-right: 15px solid #fff; border-top: 12px solid transparent; height: 0; margin: 13px 15px; position: absolute; width: 0; }
+			a.right .icon 						{ border-bottom: 12px solid transparent; border-left: 15px solid #fff; border-top: 12px solid transparent; height: 0; margin: 13px 0 13px 20px; position: absolute; width: 0; }
+
+			.navbar, .navbar ul					{ border: 0 none; margin-bottom:0; border-radius:0; background-color: #006699;}
+			.navbar 							{ overflow-x: hidden; width: 100%; margin: 0 auto;}
+			.navbar ul a						{ color: #fff; width: 100%; }
+			.navbar ul a:hover,
+			.navbar ul a:focus,
+			.navbar .carousel-menu-button:hover,
+			.navbar .dropdown a:hover, 
+			.navbar .dropdown a:focus, 
+			.nav > li > a:focus, 
+			.nav > li > a:hover,
+			.nav .open > a,
+			.nav .open > a:focus,
+			.nav .open > a:hover				{ color: #fff; background-color: #003366; }
+			.navbar ul li ul.dropdown-menu 		{ margin: 0; list-style: none; }
+			.navbar ul li ul.dropdown-menu li a	{ padding-top: 8px; padding-bottom: 8px; margin-bottom: 5px; margin-top: 5px; }
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
+			<!-- - BEGIN NAVIGATION                 																							 - -->
+			<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
+
+			<nav role="navigation" class="navbar">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button data-target=".horizontal-menu" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+						<span class="sr-only">Desplegar navegación</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse horizontal-menu">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#">Link 1</a></li>
+						<li><a href="#submenu">Link 2</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Item 1</a></li>
+								<li><a href="#">Item 2</a></li>
+								<li><a href="#">Item 3</a></li>
+							</ul>
+						</li>
+						<li><a href="#submenu">Link 3</a></li>
+						<li><a href="#submenu">Link 4</a></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</nav>
+
+		</header>
+		
+		<footer>
+			<p></p>
+			<p>
+				Carousel Menu Plugin version 1.0 <em>by Pablo E. Fernández Casado (islavisual@gmail)</em><br>
+				Licensed under MIT (https://github.com/islavisual/bootstrapCarouselMenu/blob/master/LICENSE).
+			</p>
+		</footer>
+		
+		<script>
+			/** jQuery CarouselMenu 1.0
+			* @version: 1.00
+			* @author: Pablo E. Fernández (islavisual@gmail.com).
+			* Copyright 2016 Islavisual. 
+			* Licensed under MIT (https://github.com/islavisual/bootstrapCarouselMenu/blob/master/LICENSE). 
+			* Last update: 06/04/2016
+			**/
+			$.fn.carouselMenu = function(options) {
+				var settings = $.extend({
+					duration: 500,
+					height: 'auto',
+					hoverEffect: false,
+					nextClass: "button right",
+					nextId: "carousel-menu-next",
+					prevClass: "button left",
+					prevId: "carousel-menu-prev"
+				}, options );
+				
+				function assign(){
+					if($(window).width()<768){
+						$('.carousel-menu-button').hide();
+						$('> div', target).removeClass("items").find("ul").removeClass('visible');
+						target.css({height: "", 'min-height': "" });
+					}else{
+						$('.carousel-menu-button').show();
+						target.find("ul:first").addClass('visible').parent().addClass("items");
+						target.css({height: settings.height, 'min-height': settings.height });
+					}
+					var items = $(".navbar-collapse > ul", target);
+					for (var x = 0; x < items.length; ++x){
+						var item = $(items[x]);
+						item.css("left",$(window).width()*x);
+					}
+				}
+
+				var carouselIn = "stop";
+				var target = $(this);
+				target.append('<a id="'+settings.prevId+'" class="'+settings.prevClass+' carousel-menu-button"><span class="icon"></span></a><a id="'+settings.nextId+'" class="'+settings.nextClass+' carousel-menu-button"><span class="icon"></span></a>');
+				assign();
+				
+				var items = $('div > ul', target);
+				for(var x = 0; x < items.length; ++x){
+					var item = $(items[x]); item.css("left", $(window).width()*x); 
+				}
+				
+				$('#'+settings.nextId).on("click", function(e){
+					e.preventDefault();
+
+					if(carouselIn == "stop"){
+						carouselIn = "progress";
+						$('div > ul:not(.visible)', target).css("left", $(window).width()+"px");
+						var idx = $('ul.visible', target).removeClass('visible').index()+1;
+						$('div > ul:nth-child('+idx+')', target).animate({left: (-1*$(window).width())+"px"}, settings.duration);
+						idx++; 
+						
+						if(idx > $('div > ul', target).length) idx = 1;
+
+						$('div > ul:nth-child('+idx+')', target).animate({left: "0px"}, settings.duration, function(){
+							$(this).addClass("visible");
+							carouselIn = "stop";
+						});
+					}
+				});
+				
+				$('> ul li > a', $('#'+settings.prevId).prev()).on("click", function(){
+					if($(this).parents(".items").length != 0){
+						$(this).next().css({left: $(this).offset().left+"px", position: 'fixed', top: '50px', width: 'auto'});
+					} else {
+						$(this).next().css({left: '', position: '', top: '', width: ''})
+					}
+				});
+				 
+				$('#'+settings.prevId).on("click", function(e){
+					e.preventDefault();
+
+					if(carouselIn == "stop"){
+						carouselIn = "progress";
+						$('div > ul:not(.visible)', target).css("left", (-1*$(window).width())+"px");
+						var idx = $('ul.visible', target).removeClass('visible').index()+1;
+						$('div > ul:nth-child('+idx+')', target).animate({left: ($(window).width())+"px"}, settings.duration);
+
+						idx++; 
+						
+						if(idx > $('div > ul', target).length) idx = 1;
+
+						$('div > ul:nth-child('+idx+')', target).animate({left: "0px"}, settings.duration, function(){ 
+							$(this).addClass("visible");
+							carouselIn = "stop";
+						});
+					}
+				});
+
+				if(settings.hoverEffect){
+					$('ul.nav li.dropdown').hover(function() {
+						if($('.navbar-toggle').css("display") != "none") return true;
+						$('> a', $(this)).click();
+						$(this).find('.dropdown-menu').stop(true, true).show();
+					}, function() {
+						if($('.navbar-toggle').css("display") != "none") return true;
+						$(this).find('.dropdown-menu').stop(true, true).css("display", '');
+					});
+				}
+
+				$(window).resize(function(){ assign(); });
+			};
+
+			$(function() {
+				$('nav').carouselMenu({nextClass: "button right", prevClass: "button left", height: '50px', hoverEffect: false});
+			});
+		</script>
+	</body>
+</html>
