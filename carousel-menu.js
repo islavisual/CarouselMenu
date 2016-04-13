@@ -1,9 +1,9 @@
-/** jQuery CarouselMenu 1.0b
+/** jQuery CarouselMenu 1.0
   * @version: 1.00
   * @author: Pablo E. Fernández (islavisual@gmail.com).
   * Copyright 2016 Islavisual. 
   * Licensed under MIT (https://github.com/islavisual/jQueryCarouselMenu/blob/master/LICENSE). 
-  * Last update: 06/04/2016
+  * Last update: 13/04/2016
   **/
 $.fn.carouselMenu = function(options) {
 	var settings = $.extend({
