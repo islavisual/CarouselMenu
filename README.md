@@ -11,10 +11,7 @@ Insert the following source code files in your site.
 
 How to use
 ==========
-There are several ways to use
-
-Basic Use
----------
+Suppose the following example of navigation menu:
 ```html
 <nav role="navigation" class="navbar">
 	<div class="navbar-header">
@@ -47,8 +44,27 @@ Basic Use
 	</div>
 </nav>
 
+Basic Use
+---------
 <script>
-  $(function() {
-    $('nav').carouselMenu();
-  });
+	$(function() {
+		$('nav').carouselMenu();
+	});
 </script>
+
+Customized Use
+--------------
+<script>
+	$(function() {
+		$('nav').carouselMenu({nextId: "carousel-menu-next", nextClass: "button right", prevId: "carousel-menu-prev", prevClass: "button left", height: '50px', hoverEffect: true});
+	});
+</script>
+
+Options
+-------
+__nextId__: Indicates the ID to the "next button" or show the options from the right (followings).
+__prevId__: Indicates the ID to the "previous button" or show the options from the left.
+__nextClass__: Indicates the CSS class to add into the "next" element.
+__prevClass__: Indicates the CSS class to add into the "previous" element.
+__hoverEffect__: Indicates if the hover effect must be enabled or not.
+
