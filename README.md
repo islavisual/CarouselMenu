@@ -43,23 +43,27 @@ Suppose the following example of navigation menu:
 		</ul>
 	</div>
 </nav>
-
+```
 Basic Use
 ---------
+```html
 <script>
 	$(function() {
 		$('nav').carouselMenu();
 	});
 </script>
+```
 
 Customized Use
 --------------
+```html
 <script>
 	$(function() {
 		$('nav').carouselMenu({nextId: "carousel-menu-next", nextClass: "button right", prevId: "carousel-menu-prev", prevClass: "button left", height: '50px', hoverEffect: true});
 	});
 </script>
 ```
+
 Options
 -------
 
