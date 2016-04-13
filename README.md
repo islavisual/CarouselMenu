@@ -59,7 +59,7 @@ Customized Use
 		$('nav').carouselMenu({nextId: "carousel-menu-next", nextClass: "button right", prevId: "carousel-menu-prev", prevClass: "button left", height: '50px', hoverEffect: true});
 	});
 </script>
-
+```
 Options
 -------
 __nextId__: Indicates the ID to the "next button" or show the options from the right (followings).
@@ -67,4 +67,8 @@ __prevId__: Indicates the ID to the "previous button" or show the options from t
 __nextClass__: Indicates the CSS class to add into the "next" element.
 __prevClass__: Indicates the CSS class to add into the "previous" element.
 __hoverEffect__: Indicates if the hover effect must be enabled or not.
+__height__: Height of navigations menu. By default is 'auto'.
+__duration__: Duration of animations.
+
+For more information on web design and development don't leave to visit <a target="_blank"  href="http://www.islavisual.com/articulos/desarrollo_web/">islavisual.com</a>.
 
