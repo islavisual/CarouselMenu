@@ -3,8 +3,8 @@ Plugin to create navigation menus with carousel effect.
 
 Requeriments
 ------------
-  · jQuery 1.7+ 
-  · Bootstrap 3+
+* jQuery 1.7+ 
+* Bootstrap 3+
 
 Install
 =======
