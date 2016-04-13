@@ -1,6 +1,11 @@
 # CarouselMenu 1.0
 Plugin to create navigation menus with carousel effect.
 
+Requeriments
+------------
+  · jQuery 1.7+ 
+  · Bootstrap 3+
+
 Install
 =======
 Insert the following source code files in your site.
