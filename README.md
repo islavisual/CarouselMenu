@@ -1,4 +1,4 @@
-# CarouselMenu 1.0
+# Bootstrap Carousel Menu 1.0
 Plugin to create navigation menus with carousel effect.
 
 Requeriments
