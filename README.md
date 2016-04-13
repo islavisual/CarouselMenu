@@ -10,7 +10,7 @@ Install
 =======
 Insert the following source code files in your site.
 ```html
-<script src="js/carousel-menu.js"></script>
+<script src="js/carousel-menu.min.js"></script>
 <link href="css/carousel-menu.css" rel="stylesheet">
 ```
 
