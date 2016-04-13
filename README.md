@@ -1,5 +1,5 @@
-# CarouselMenu
-Plugin to create navigation menus with carousel effect
+# CarouselMenu 1.0
+Plugin to create navigation menus with carousel effect.
 
 Install
 =======
